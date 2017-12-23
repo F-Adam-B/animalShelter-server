@@ -1,8 +1,9 @@
 "use strict";
-function createNode(data=null, next=null) {
+function createNode(data=null, next=null, prev=null) {
     return {
         data,
-        next
+        next,
+        prev
     }
 }
 
@@ -11,6 +12,20 @@ class Queue {
         this.first = null;
         this.last = null;
     }
+
+    peek(){
+        if(this.first === null){
+            return null
+        }
+        return this.first.data
+    }
+
+    pop(){
+        const node = this.top
+        this.first = node.next
+        return node.data
+    }
+
 
     enqueue(data) {
         let node = createNode(data);

@@ -18,7 +18,7 @@ let cats = [{
   },
   {
     imageURL:'http://cdn3-www.cattime.com/assets/uploads/gallery/siberian-cats-and-kittens/siberian-cats-kittens-10.jpg',
-    imageDescription: 'Orange bengal cat with black stripes lounging on concrete.',
+    imageDescription: 'Brown and tan cat with an all white background standing and staring off to the right of the screen.',
     name: 'Smelly Cat',
     sex: 'Male',
     age: 2,
@@ -27,7 +27,7 @@ let cats = [{
   },
   {
     imageURL:'http://rs113.pbsrc.com/albums/n209/jubu97rn/nastycat_sentbyJeanBrauner.jpg?w=280&h=210&fit=crop',
-    imageDescription: 'Orange bengal cat with black stripes lounging on concrete.',
+    imageDescription: 'Hairless ferel looking cat with large ears looking back at the screen',
     name: 'Hobbes',
     sex: 'Male',
     age: 3,
@@ -46,7 +46,7 @@ let cats = [{
   },
   {
     imageURL: 'https://vetstreet.brightspotcdn.com/dims4/default/ef88942/2147483647/crop/0x0%2B0%2B0/resize/645x380/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2Fec%2Fedb760a8af11e0a0d50050568d634f%2Ffile%2Fnova-scotia-duck-tolling-retriever-5-645mk070411.jpg',
-    imageDescription: 'A smiling golden-brown golden retreiver listening to music.',
+    imageDescription: 'A Duck Toller standing looking off into the distance to the right of the screen.',
     name: 'Uki',
     sex: 'Female',
     age: 2,
@@ -55,7 +55,7 @@ let cats = [{
   },
   {
     imageURL: 'http://cdn2-www.dogtime.com/assets/uploads/gallery/mutt-dog-breed-pictures/thumbs/thumbs_face-1.jpg',
-    imageDescription: 'A smiling golden-brown golden retreiver listening to music.',
+    imageDescription: 'A mixed breed medium size black and white log haired dog looking back at the screen.',
     name: 'Sharko',
     sex: 'Male',
     age: 3,
@@ -66,7 +66,6 @@ let cats = [{
 
 
   function seedQueue(array, queue){
-    //   console.log(queue, 'queue')
       for(let i = 0; i < array.length; i++){
         queue.enqueue(array[i])
       }
@@ -79,6 +78,8 @@ let cats = [{
   seedQueue(dogs, dogQueue)
   seedQueue(cats, catQueue);
 
+//   console.log(dogQueue, 'dogQueue')
+  console.log(catQueue.peek(), 'catQueuePeek')
  
 
 
@@ -96,23 +97,23 @@ app.use(
 
 app.get('/api/cat', (req, res) => {
     //show the cat that is next in line to be adopted
-    res.json(cats[0])//return a cat);
+    res.json(catQueue.peek())//return a cat);
 });
 
 
 app.delete('/api/cat', (req, res) => {
 // replace shift() with deque()
-    res.json(cats.shift())
+    res.json(catQueue.dequeue())
 });
 
 app.get('/api/dog', (req, res) => {
     // dogs[0] will be replace with peek()
-    res.json(dogs[0])
+    res.json(dogQueue.peek())
 });
 
 app.delete('/api/dog', (req, res) => {
 
-    res.json(dogs.shift())
+    res.json(dogQueue.dequeue())
 });
 
 
