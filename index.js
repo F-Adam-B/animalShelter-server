@@ -63,25 +63,16 @@ let cats = [{
     story: 'Mother wasn\'t neutered'
   }]
   
-
-
   function seedQueue(array, queue){
       for(let i = 0; i < array.length; i++){
         queue.enqueue(array[i])
       }
   }
-
-
   const dogQueue = new Queue();
   const catQueue = new Queue();
 
   seedQueue(dogs, dogQueue)
   seedQueue(cats, catQueue);
-
-//   console.log(dogQueue, 'dogQueue')
-  console.log(catQueue.peek(), 'catQueuePeek')
- 
-
 
 app.use(
     morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -96,18 +87,14 @@ app.use(
 );
 
 app.get('/api/cat', (req, res) => {
-    //show the cat that is next in line to be adopted
-    res.json(catQueue.peek())//return a cat);
+    res.json(catQueue.peek())
 });
 
-
 app.delete('/api/cat', (req, res) => {
-// replace shift() with deque()
     res.json(catQueue.dequeue())
 });
 
 app.get('/api/dog', (req, res) => {
-    // dogs[0] will be replace with peek()
     res.json(dogQueue.peek())
 });
 
@@ -115,9 +102,6 @@ app.delete('/api/dog', (req, res) => {
 
     res.json(dogQueue.dequeue())
 });
-
-
-
 
 function runServer(port = PORT) {
     const server = app
